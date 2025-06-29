@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Video</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Video Container - This will be sticky -->
+    <div id="container">
+        <video muted playsinline>
+            <source src="0001-0460.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        
+        <!-- Text boxes that appear as you scroll -->
+        <div class="text-overlay">
+            <div class="text-box" id="text1">
+                <h3>Säve flygplats är avgörande för Sveriges säkerhet – men hotas av nedläggning.</h3>
+                <p>Om inget görs innan 31 december 2025 förlorar vi miljötillståndet – för alltid.</p>
+            </div>
+            <div class="text-box" id="text2">
+                <h3>NATO representant vid officiellt besök</h3>
+                <p>Vi behöver Säve för att snabbt kunna etablera ett luftvärnsskydd kring Göteborgs hamn.</p>
+            </div>
+            <div class="text-box" id="text3">
+                <h3>Castellum planerar att:</h3>
+                <p>Lägga väg över landningsbanan.</p>
+                <p>Stänga tornet</p>
+                <p>Bygga logistikcentrum på flygfältet
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scrollable content to make the page longer -->
+    <div class="scroll-content">
+        <div class="section">
+            <h2>Section 1</h2>
+            <p>Start scrolling down to see the video play...</p>
+        </div>
+        <div class="section">
+            <h2>Section 2</h2>
+            <p>The video will scrub forward as you scroll down...</p>
+        </div>
+        <div class="section">
+            <h2>Section 3</h2>
+            <p>Keep scrolling to see more of the video...</p>
+        </div>
+        <div class="section">
+            <h2>Section 4</h2>
+            <p>The video stays sticky while you scroll through content...</p>
+        </div>
+        <div class="section">
+            <h2>Section 5</h2>
+            <p>Creating a smooth scroll video experience...</p>
+        </div>
+        <div class="section">
+            <h2>Section 6</h2>
+            <p>Perfect for showcasing your video content...</p>
+        </div>
+        <div class="section">
+            <h2>Section 7</h2>
+            <p>Scroll back up to reverse the video...</p>
+        </div>
+        <div class="section">
+            <h2>Section 8</h2>
+            <p>Final section - video should reach the end...</p>
+        </div>
+    </div>
+
+    <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.3/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
