@@ -1,21 +1,44 @@
 $(document).ready(function() {
     console.log("Document ready!");
     console.clear();
-    $('video').addClass('video-background');
+    
+    // Start screen handling
+    const startScreen = document.getElementById('start-screen');
+    const startButton = document.getElementById('start-button');
+    const body = document.body;
+    let hasStarted = false;
 
+    // Prevent scrolling until start
+    body.classList.add('no-scroll');
+
+    // Initialize everything but don't start auto-scrolling yet
+    $('video').addClass('video-background');
     const video = document.querySelector(".video-background");
     let src = video.currentSrc || video.src;
-    console.log("Video element:", video);
-    console.log("Video source:", src);
-
+    
     // Auto-scroll variables
-    let isAutoScrolling = true;
+    let isAutoScrolling = false;  // Start as false
     let lastTime = null;
     const targetFPS = 8;
     const msPerFrame = 1000 / targetFPS;
-    const speedMultiplier = 4.5; // Makes it move faster than the video duration
+    const speedMultiplier = 4.5;
     let lastScrollPosition = window.pageYOffset;
-    
+
+    // Start button click handler
+    startButton.addEventListener('click', () => {
+        startScreen.classList.add('hidden');
+        body.classList.remove('no-scroll');
+        isAutoScrolling = true;  // Start auto-scrolling
+        hasStarted = true;
+        
+        // Scroll to top to ensure we start from the beginning
+        window.scrollTo(0, 0);
+        
+        // Start the video if needed
+        video.play();
+        video.pause();
+    });
+
     // Function to handle auto-scrolling
     function autoScroll(currentTime) {
         if (!lastTime) lastTime = currentTime;
@@ -44,6 +67,7 @@ $(document).ready(function() {
     // Pause auto-scroll on user interaction
     let userScrollTimeout;
     window.addEventListener('wheel', function(e) {
+        if (!hasStarted) return;  // Ignore scroll events before start
         isAutoScrolling = false;
         clearTimeout(userScrollTimeout);
         
@@ -67,12 +91,14 @@ $(document).ready(function() {
     // Also pause on touch for mobile devices
     let touchStartY = 0;
     window.addEventListener('touchstart', function(e) {
+        if (!hasStarted) return;  // Ignore touch events before start
         isAutoScrolling = false;
         clearTimeout(userScrollTimeout);
         touchStartY = e.touches[0].clientY;
     }, { passive: true });
 
     window.addEventListener('touchend', function(e) {
+        if (!hasStarted) return;  // Ignore touch events before start
         const touchEndY = e.changedTouches[0].clientY;
         const scrollingDown = touchEndY < touchStartY;
         
@@ -149,6 +175,7 @@ $(document).ready(function() {
 
         // Show all text boxes in the last 5% of scroll
         window.addEventListener('scroll', () => {
+            if (!hasStarted) return;  // Ignore scroll events before start
             const scrollPercentage = window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight);
             if (scrollPercentage >= 0.95) {
                 text1.classList.add('visible', 'final-position');
@@ -168,14 +195,15 @@ $(document).ready(function() {
                 start: "20% top",
                 end: "30% top",
                 scrub: 0,
-                onEnter: () => text1.classList.add('visible'),
+                onEnter: () => hasStarted && text1.classList.add('visible'),
                 onLeave: () => {
+                    if (!hasStarted) return;
                     if (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight) < 0.95) {
                         text1.classList.remove('visible');
                     }
                 },
-                onEnterBack: () => text1.classList.add('visible'),
-                onLeaveBack: () => text1.classList.remove('visible')
+                onEnterBack: () => hasStarted && text1.classList.add('visible'),
+                onLeaveBack: () => hasStarted && text1.classList.remove('visible')
             }
         });
 
@@ -186,14 +214,15 @@ $(document).ready(function() {
                 start: "50% top",
                 end: "60% top",
                 scrub: 0,
-                onEnter: () => text2.classList.add('visible'),
+                onEnter: () => hasStarted && text2.classList.add('visible'),
                 onLeave: () => {
+                    if (!hasStarted) return;
                     if (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight) < 0.95) {
                         text2.classList.remove('visible');
                     }
                 },
-                onEnterBack: () => text2.classList.add('visible'),
-                onLeaveBack: () => text2.classList.remove('visible')
+                onEnterBack: () => hasStarted && text2.classList.add('visible'),
+                onLeaveBack: () => hasStarted && text2.classList.remove('visible')
             }
         });
 
@@ -204,14 +233,15 @@ $(document).ready(function() {
                 start: "80% top",
                 end: "90% top",
                 scrub: 0,
-                onEnter: () => text3.classList.add('visible'),
+                onEnter: () => hasStarted && text3.classList.add('visible'),
                 onLeave: () => {
+                    if (!hasStarted) return;
                     if (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight) < 0.95) {
                         text3.classList.remove('visible');
                     }
                 },
-                onEnterBack: () => text3.classList.add('visible'),
-                onLeaveBack: () => text3.classList.remove('visible')
+                onEnterBack: () => hasStarted && text3.classList.add('visible'),
+                onLeaveBack: () => hasStarted && text3.classList.remove('visible')
             }
         });
     });
