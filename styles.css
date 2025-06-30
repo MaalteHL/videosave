@@ -30,6 +30,32 @@ body {
     overflow: hidden;
 }
 
+/* Top gradient overlay */
+#container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 20%, rgba(0, 0, 0, 0) 100%);
+    z-index: 15;
+    pointer-events: none;
+}
+
+/* Bottom gradient overlay */
+#container::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 20%, rgba(0, 0, 0, 0) 100%);
+    z-index: 15;
+    pointer-events: none;
+}
+
 .video-background {
     width: 100%;
     height: 100%;
@@ -51,13 +77,13 @@ body {
     position: absolute;
     bottom: 40px;
     left: 40px;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0);
     color: white;
     padding: 20px 25px;
     border-radius: 12px;
     max-width: 300px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(0px);
+    border: 0px solid rgba(255, 255, 255, 0.);
     transform: translateX(-100%);
     opacity: 0;
     transition: all 0.5s ease;
@@ -68,12 +94,13 @@ body {
     font-weight: 600;
     margin-bottom: 8px;
     color: #fff;
+    opacity: 0;
 }
 
 .text-box p {
     font-size: 0.95rem;
     line-height: 1.4;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0);
 }
 
 .text-box.visible {
@@ -259,4 +286,65 @@ body {
 /* Prevent scrolling when start screen is visible */
 body.no-scroll {
     overflow: hidden;
+}
+
+/* Final header styles */
+@font-face {
+    font-family: 'Nohemi';
+    src: url('https://use.typekit.net/af/d63f73/00000000000000007735c721/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3') format('woff2'),
+         url('https://use.typekit.net/af/d63f73/00000000000000007735c721/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3') format('woff'),
+         url('https://use.typekit.net/af/d63f73/00000000000000007735c721/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+.final-header {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 30;
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.final-header h1 {
+    font-family: 'Nohemi', sans-serif;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.final-header .top-text {
+    font-size: 8rem;
+    display: block;
+}
+
+.final-header .bottom-text {
+    font-size: 6rem;
+    display: block;
+}
+
+.final-header.visible {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .final-header .top-text {
+        font-size: 4rem;
+    }
+    
+    .final-header .bottom-text {
+        font-size: 3rem;
+    }
 } 

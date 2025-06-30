@@ -177,7 +177,7 @@ $(document).ready(function() {
         window.addEventListener('scroll', () => {
             if (!hasStarted) return;  // Ignore scroll events before start
             const scrollPercentage = window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight);
-            if (scrollPercentage >= 0.95) {
+            if (scrollPercentage >= 0.96) {
                 text1.classList.add('visible', 'final-position');
                 text2.classList.add('visible', 'final-position');
                 text3.classList.add('visible', 'final-position');
@@ -242,6 +242,53 @@ $(document).ready(function() {
                 },
                 onEnterBack: () => hasStarted && text3.classList.add('visible'),
                 onLeaveBack: () => hasStarted && text3.classList.remove('visible')
+            }
+        });
+
+        // Final header animation
+        const finalHeader = document.querySelector('.final-header');
+        
+        // Add scroll listener for final header
+        window.addEventListener('scroll', () => {
+            if (!hasStarted) return;
+            const scrollPercentage = window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight);
+            if (scrollPercentage >= 0.96) {
+                finalHeader.classList.add('visible');
+            } else {
+                finalHeader.classList.remove('visible');
+            }
+        });
+
+        gsap.to(finalHeader, {
+            scrollTrigger: {
+                trigger: "body",
+                start: "96% top",
+                end: "bottom bottom",
+                scrub: 0,
+                onEnter: () => {
+                    if (hasStarted) {
+                        console.log("Final header entering");
+                        finalHeader.classList.add('visible');
+                    }
+                },
+                onLeave: () => {
+                    if (hasStarted) {
+                        console.log("Final header leaving");
+                        finalHeader.classList.remove('visible');
+                    }
+                },
+                onEnterBack: () => {
+                    if (hasStarted) {
+                        console.log("Final header entering back");
+                        finalHeader.classList.add('visible');
+                    }
+                },
+                onLeaveBack: () => {
+                    if (hasStarted) {
+                        console.log("Final header leaving back");
+                        finalHeader.classList.remove('visible');
+                    }
+                }
             }
         });
     });
