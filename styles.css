@@ -87,25 +87,37 @@ body {
     opacity: 1 !important;
     position: absolute;
     bottom: auto !important;
-    top: 50% !important;
-    left: auto !important;
-    margin: 0 10px;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0;
     transition: all 0.8s ease;
+    max-width: 350px;
+    width: 90%;
+}
+
+/* Container for final position */
+.text-overlay::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 1200px;
+    height: 1px;
+    pointer-events: none;
 }
 
 #text1.final-position {
-    left: calc(50% - 450px) !important;
-    transform: translate(0, -50%) !important;
+    top: calc(50% - 220px) !important;
 }
 
 #text2.final-position {
-    left: calc(50% - 150px) !important;
-    transform: translate(0, -50%) !important;
+    top: 50% !important;
 }
 
 #text3.final-position {
-    left: calc(50% + 150px) !important;
-    transform: translate(0, -50%) !important;
+    top: calc(50% + 220px) !important;
 }
 
 @media (max-width: 1200px) {
