@@ -4,6 +4,18 @@
     box-sizing: border-box;
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+html {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    scroll-behavior: smooth;
+}
+
 body {
     background: #000;
     overflow-x: hidden;
@@ -69,6 +81,53 @@ body {
     opacity: 1;
 }
 
+/* Final row layout styles */
+.text-box.final-position {
+    transform: translateX(0) !important;
+    opacity: 1 !important;
+    position: absolute;
+    bottom: auto !important;
+    top: 50% !important;
+    left: auto !important;
+    margin: 0 10px;
+    transition: all 0.8s ease;
+}
+
+#text1.final-position {
+    left: calc(50% - 450px) !important;
+    transform: translate(0, -50%) !important;
+}
+
+#text2.final-position {
+    left: calc(50% - 150px) !important;
+    transform: translate(0, -50%) !important;
+}
+
+#text3.final-position {
+    left: calc(50% + 150px) !important;
+    transform: translate(0, -50%) !important;
+}
+
+@media (max-width: 1200px) {
+    .text-box.final-position {
+        transform: translate(-50%, -50%) !important;
+        left: 50% !important;
+        margin: 0;
+    }
+
+    #text1.final-position {
+        top: calc(50% - 200px) !important;
+    }
+
+    #text2.final-position {
+        top: 50% !important;
+    }
+
+    #text3.final-position {
+        top: calc(50% + 200px) !important;
+    }
+}
+
 /* Scrollable content sections */
 .scroll-content {
     position: relative;
@@ -99,11 +158,6 @@ body {
     max-width: 600px;
     line-height: 1.6;
     opacity: 0.6;
-}
-
-/* Smooth scrolling */
-html {
-    scroll-behavior: smooth;
 }
 
 /* Responsive design */
