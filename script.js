@@ -248,9 +248,9 @@ $(document).ready(function() {
         // Final header animation
         const finalHeader = document.querySelector('.final-header');
         
-        // Add scroll listener for final header
+        // Show final header in the last 5% of scroll
         window.addEventListener('scroll', () => {
-            if (!hasStarted) return;
+            if (!hasStarted) return;  // Ignore scroll events before start
             const scrollPercentage = window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight);
             if (scrollPercentage >= 0.96) {
                 finalHeader.classList.add('visible');
@@ -259,36 +259,17 @@ $(document).ready(function() {
             }
         });
 
+        // Also add GSAP animation for smoother control
         gsap.to(finalHeader, {
             scrollTrigger: {
                 trigger: "body",
-                start: "96% top",
+                start: "95% top",
                 end: "bottom bottom",
-                scrub: 0,
-                onEnter: () => {
-                    if (hasStarted) {
-                        console.log("Final header entering");
-                        finalHeader.classList.add('visible');
-                    }
-                },
-                onLeave: () => {
-                    if (hasStarted) {
-                        console.log("Final header leaving");
-                        finalHeader.classList.remove('visible');
-                    }
-                },
-                onEnterBack: () => {
-                    if (hasStarted) {
-                        console.log("Final header entering back");
-                        finalHeader.classList.add('visible');
-                    }
-                },
-                onLeaveBack: () => {
-                    if (hasStarted) {
-                        console.log("Final header leaving back");
-                        finalHeader.classList.remove('visible');
-                    }
-                }
+                scrub: 0.5,
+                onEnter: () => hasStarted && finalHeader.classList.add('visible'),
+                onLeave: () => hasStarted && finalHeader.classList.remove('visible'),
+                onEnterBack: () => hasStarted && finalHeader.classList.add('visible'),
+                onLeaveBack: () => hasStarted && finalHeader.classList.remove('visible')
             }
         });
     });
