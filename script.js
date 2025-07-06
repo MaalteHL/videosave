@@ -39,6 +39,11 @@ $(document).ready(function() {
         video.pause();
     });
 
+    // Automatically trigger start button after a short delay
+    setTimeout(() => {
+        startButton.click();
+    }, 500);
+
     // Function to handle auto-scrolling
     function autoScroll(currentTime) {
         if (!lastTime) lastTime = currentTime;
